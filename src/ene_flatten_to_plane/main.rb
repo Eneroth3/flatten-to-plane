@@ -14,11 +14,11 @@ module FlattenToPlane
     curves.each { |c| c.edges.first.explode_curve }
 
     vertices = entities.select { |e| e.respond_to?(:vertices) }.flat_map(&:vertices).uniq
-    return if vertices.empty?
-    vectors = vertices.map do |v|
-      v.position.project_to_plane(plane) - v.position
-    end
-    entities.first.parent.entities.transform_by_vectors(vertices, vectors)
+    instances = entities.select { |e| e.respond_to?(:transformation) }
+    original_points = vertices.map(&:position)
+    original_points += instances.map { |i| i.transformation.origin }
+    vectors = original_points.map { |p| p.project_to_plane(plane) - p }
+    entities.first.parent.entities.transform_by_vectors(vertices + instances, vectors)
 
     # Using transform_by_vectors on several vertices at once may cause 2D texts
     # from going mad with NAN coordinates and break SketchUp rendering.
