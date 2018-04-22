@@ -8,13 +8,10 @@ module FlattenToPlane
   end
 
   def self.flatten_to_plane(entities, plane = [ORIGIN, Z_AXIS])
-    # Note that entities here is an Array of Entity objects, not an Entities
-    # collection object.
-
     # If curves are not exploded moving one vertex will also move its neighbours,
     # causing a very unpredictable result.
     curves = entities.select { |e| e.respond_to?(:curve) }.flat_map(&:curve).compact.uniq
-    curves.each(&:explode)
+    curves.each { |c| c.edges.first.explode_curve }
 
     vertices = entities.select { |e| e.respond_to?(:vertices) }.flat_map(&:vertices).uniq
     return if vertices.empty?
