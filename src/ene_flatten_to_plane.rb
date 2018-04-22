@@ -25,7 +25,7 @@ module FlattenToPlane
   EXTENSION.description =
     "Flatten selected geometry to horizontal plane. Useful for cleaning up "\
     "imported DWGs."
-  EXTENSION.version     = "1.0.0"
+  EXTENSION.version     = "1.1.0"
   EXTENSION.copyright   = "#{EXTENSION.creator} Copyright (c) 2018"
   Sketchup.register_extension(EXTENSION, true)
 
