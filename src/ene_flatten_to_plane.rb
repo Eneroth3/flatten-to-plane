@@ -22,9 +22,7 @@ module FlattenToPlane
     File.join(PLUGIN_DIR, "main")
   )
   EXTENSION.creator     = "Julia Christina Eneroth"
-  EXTENSION.description =
-    "Flatten selected geometry to horizontal plane. Useful for cleaning up "\
-    "imported DWGs."
+  EXTENSION.description = "Flatten selected geometry to horizontal plane."
   EXTENSION.version     = "1.1.0"
   EXTENSION.copyright   = "#{EXTENSION.creator} Copyright (c) 2018"
   Sketchup.register_extension(EXTENSION, true)
